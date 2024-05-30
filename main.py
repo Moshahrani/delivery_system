@@ -1,3 +1,7 @@
+# Moshfeq Shahrani
+#  ID - 011919956
+
+
 import csv
 import datetime
 
@@ -15,7 +19,6 @@ def loadPackagesFromCSV(filename, hash_table):
         packageData = csv.reader(packages, delimiter=',')
         
         for package in packageData:
-            key = package[0]
             package_id = package[0]
             address = package[1]
             city = package[2]
@@ -35,7 +38,7 @@ def loadPackagesFromCSV(filename, hash_table):
         packageData = csv.reader(packages, delimiter=',')
         
         #  extracting all attributes and creating a new package Object for each package's data
-        
+
         for package in packageData:
             package_id = package[0]
             address = package[1]
