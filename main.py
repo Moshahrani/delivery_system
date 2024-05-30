@@ -1,5 +1,8 @@
+# ******************
+
 # Moshfeq Shahrani
-#  ID - 011919956
+# ID - 011919956
+# C950 
 
 
 import csv
@@ -67,11 +70,44 @@ def loadPackagesFromCSV(filename, hash_table):
 
 packages_hash = CustomHashTable()
 loadPackagesFromCSV('./packageCSV.csv', packages_hash)
-print(packages_hash)
+
+#   O(n) time and space complexity
+#   method to load distances from csv to a list for a 2 x 2 matrix 
+
+def loadDistanceData(filename):
+     
+     with open(filename) as distances:
+          data = csv.reader(distances, delimiter=',')
+          for row in data:
+                distance_data.append(row)
+               
+
+distance_data = []
+loadDistanceData('./distanceCSV.csv')
+
+#   O(n) time and space complexity
+#   Reading all data once and extracting addresses to list
+
+def loadAddressData(filename):
+     
+     with open(filename) as addresses:
+          data = csv.reader(addresses, delimiter=',')
+          for row in data:
+               address_data.append(row)
 
 
+address_data = []
+loadAddressData('./addressCSV.csv')
+print(address_data)
 
+# O(1) time complexity, constant time lookup
+# method to calculate distance between two addresses
+# returns float of measured distance
 
+def distance_between(address1, address2):
+    distance = distance_data[address1][address2]
 
-
-
+    #  check for reverse in case of blank data
+    if distance == '':
+        distance = distance_data[address2][address1]
+    return float(distance)
