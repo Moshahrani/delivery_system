@@ -111,3 +111,28 @@ def distance_between(address1, address2):
     if distance == '':
         distance = distance_data[address2][address1]
     return float(distance)
+
+
+def closest_from_truck(truck):
+    minimum_distance = float('inf')
+    closest_package = None
+
+    for package in truck.packages:
+        distance = distance_between(package.address, truck.location)
+
+        if distance < minimum_distance:
+            minimum_distance = distance
+            closest_package = package.address
+    
+    if closest_package:
+         return closest_package
+    else:
+         return None
+
+
+truck1 = Truck(16, 0, 18, [1,13,14,15,16,19,20,27,29,30,31,34,37,40], '4001 South 700 East', '',
+                datetime.timedelta(hours=8, minutes=00))
+truck2 = Truck(16, 0, 18, [3,4,5,6,9,18,26,28,32,35,36,38], '4001 South 700 East', '',
+                datetime.timedelta(hours=9, minutes=5))
+truck3 = Truck(16, 0, 18, [2,7,8,10,11,12,17,21,22,23,24,25,33,39], '4001 South 700 East', '',
+                datetime.timedelta(hours=10, minutes=30))
