@@ -19,6 +19,7 @@ class CustomHashTable:
     #  Prints an error statement if package ID already exists
 
     def add(self, key, value):
+
         hash_key = self.hashing_key(key)
         kv_pair = [key, value]
 
@@ -33,12 +34,13 @@ class CustomHashTable:
     #  if found, will return package ID
     
     def search(self, key):
+
         hash_key = self.hashing_key(key)
         bucket = self.table[hash_key]
-
         for kvp in bucket:
             if kvp[0] == key:
                 return kvp[1]
+            print(kvp)
         return None
     
     #  Searches hash table and deletes package ID if it exists, returns True
@@ -52,4 +54,3 @@ class CustomHashTable:
                 del bucket[i]
                 return True
         return False
-
