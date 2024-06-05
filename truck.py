@@ -1,15 +1,15 @@
-
+from datetime import datetime
     #  Truck class with attributes required for tracking during deliveries
 
 class Truck:
-    def __init__(self, load_capacity, mileage, speed, packages, location, delivery_time, departure_time):
+    def __init__(self, load_capacity, mileage, speed, packages, location, departure_offset, ID):
         self.load_capacity = load_capacity
         self.mileage = mileage
         self.speed = speed
         self.packages = packages
         self.location = location
-        self.delivery_time = delivery_time
-        self.departure_time = departure_time
+        self.departure_time = datetime(2024, 6, 1, 8, 0, 0) + departure_offset
+        self.ID = ID
 
     def __repr__(self):
         return (
