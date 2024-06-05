@@ -2,7 +2,8 @@
 class CustomHashTable:
 
     #  Custom Hash table implementation
-    #  Runtime of all operations is O(1) constant time
+    ###  Runtime of all operations is O(1) constant time
+    ### unless poor hash function, high collision rate etc.
 
     def __init__(self, size=10):
         self.size = size
@@ -45,6 +46,7 @@ class CustomHashTable:
     
     #  Searches hash table and deletes package ID if it exists, returns True
     #  else it will just return False
+    
     def delete(self, key):
         hash_key = self.hashing_key(key)
         bucket = self.table[hash_key]
@@ -54,3 +56,18 @@ class CustomHashTable:
                 del bucket[i]
                 return True
         return False
+
+    def __iter__(self):
+        for bucket in self.table:
+            for key, value in bucket:
+                yield value  
+
+    #  get all keys for easy extraction to cli methods
+    #  O(n) runtime since we have to iterate through hash table in full one time for all keys
+
+    def get_all_keys(self):
+        keys = []
+        for bucket in self.table:
+            for kvp in bucket:
+                keys.append(kvp[0])
+        return keys
