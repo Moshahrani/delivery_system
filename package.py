@@ -2,7 +2,7 @@
 # Package class with package attributes
 
 class Package: 
-    def __init__(self, ID='', address='', city='', state='', zip_code='', delivery_time='', weight='', date='', status=''):
+    def __init__(self, ID='', address='', city='', state='', zip_code='', delivery_time='', weight='', date='', status='', truck_id=None):
         self.ID = ID
         self.address = address
         self.city = city
@@ -12,6 +12,7 @@ class Package:
         self.weight = weight
         self.date = date
         self.status = status
+        self.truck_id = truck_id
 
     #  Provides a clear and readable string for debugging
     #  includes all attributes from Package object
