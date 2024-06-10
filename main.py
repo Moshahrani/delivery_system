@@ -302,8 +302,8 @@ def package_status_at_time(ht, query_time):
 
             #  print all packages with their status at user inputted time 
 
-            print(f"Package ID: {package.ID}, Status at {query_time.strftime('%H:%M:%S')}: {package.status}")
-
+            print(f"Package ID: {package.ID}, City: {package.city}, Address: {package.address} , {package.zip_code}, Weight: {package.weight}, Truck: {package.truck_id}, Status at {query_time.strftime('%H:%M:%S')}: {package.status}")
+        
     if not found_packages:
         print("No packages found.")
 
