@@ -265,6 +265,7 @@ def query_specific_package(ht):
 def package_status_at_time(ht, query_time):
 
     query_time = datetime.strptime(query_time, "%H:%M:%S").time()
+    correction_time = datetime.strptime("10:20:00", "%H:%M:%S").time()
 
     #   O(n) time complexity as all packages need to be found once for status retrieval
 
@@ -287,6 +288,15 @@ def package_status_at_time(ht, query_time):
             truck_departure_time = truck_departure_times.get(package.truck_id)
             truck_departure_time = truck_departure_time.time() if truck_departure_time else None
 
+
+             # print old address for package #9 if query_time is before 10:20 AM
+            if package.ID == 9 and query_time < correction_time:
+                old_address = "Third District Juvenile Court"
+                status = "In Transit"
+                print(f"Package ID: {package.ID}, City: {package.city}, Address: {old_address} , {package.zip_code}, Weight: {package.weight}, Truck: {package.truck_id}, Status at {query_time.strftime('%H:%M:%S')}: {status}")
+                continue
+
+
             #  get status of packages based on user input of time
 
             if truck_departure_time and query_time < truck_departure_time:
@@ -298,11 +308,12 @@ def package_status_at_time(ht, query_time):
             else:
                 package.status = "At Hub"
 
+           
             found_packages = True
 
             #  print all packages with their status at user inputted time 
 
-            print(f"Package ID: {package.ID}, City: {package.city}, Address: {package.address} , {package.zip_code}, Weight: {package.weight}, Truck: {package.truck_id}, Status at {query_time.strftime('%H:%M:%S')}: {package.status}")
+            print(f"Package ID: {package.ID}, City: {package.city}, Address: {package.address} , {package.zip_code}, Weight: {package.weight}, Truck: {package.truck_id}, Delivery Time: {package.delivery_time}, Status at {query_time.strftime('%H:%M:%S')}: {package.status}")
         
     if not found_packages:
         print("No packages found.")
