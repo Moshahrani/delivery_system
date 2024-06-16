@@ -296,7 +296,7 @@ def package_status_at_time(ht, query_time):
                 print(f"Package ID: {package.ID}, City: {package.city}, Address: {old_address} , {package.zip_code}, Weight: {package.weight}, Truck: {package.truck_id}, Status at {query_time.strftime('%H:%M:%S')}: {status}")
                 continue
 
-
+            not_delivered = "None"
             #  get status of packages based on user input of time
 
             if truck_departure_time and query_time < truck_departure_time:
@@ -308,12 +308,14 @@ def package_status_at_time(ht, query_time):
             else:
                 package.status = "At Hub"
 
-           
             found_packages = True
 
-            #  print all packages with their status at user inputted time 
+            if package.status == "At Hub" or package.status == "In transit":
+                 print(f"Package ID: {package.ID}, City: {package.city}, Address: {package.address} , {package.zip_code}, Weight: {package.weight}, Truck: {package.truck_id}, Delivery Time: {not_delivered}, Status at {query_time.strftime('%H:%M:%S')}: {package.status}")
 
-            print(f"Package ID: {package.ID}, City: {package.city}, Address: {package.address} , {package.zip_code}, Weight: {package.weight}, Truck: {package.truck_id}, Delivery Time: {package.delivery_time}, Status at {query_time.strftime('%H:%M:%S')}: {package.status}")
+            #  print all packages with their status at user inputted time 
+            else:
+                print(f"Package ID: {package.ID}, City: {package.city}, Address: {package.address} , {package.zip_code}, Weight: {package.weight}, Truck: {package.truck_id}, Delivery Time: {package.delivery_time}, Status at {query_time.strftime('%H:%M:%S')}: {package.status}")
         
     if not found_packages:
         print("No packages found.")
@@ -326,9 +328,9 @@ def menu(ht, truck_list):
         print("====== WGUPS ========")
         print("=====================")
         print("Please select a menu option for more information about a delivery.\n")
-        print("\t 1. Full Report")
-        print("\t 2. Package Info")
-        print("\t 3. Query Packages by Delivery Time")
+        print("\t 1. Full Report") # general report of all deliveries end of day
+        print("\t 2. Package Info") # specific single package information
+        print("\t 3. Query Packages by Delivery Time") # packages by specific time 
         print("\t 4. Exit")
 
         #  options for user to choose from
